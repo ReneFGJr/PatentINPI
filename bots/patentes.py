@@ -26,9 +26,12 @@ def run(parm):
     elif parm[1] == 'issue':
         if (len(parm) > 1):
             print("Issue",parm[2])
-            if (parm[2] == 'files'):
+            if (parm[2] == 'files') or (parm[2] == 'download'):
                 for i in range(10):
-                    mod_issue_files.download()
+                    if (len(parm) > 2):
+                        mod_issue_files.download(parm[3])
+                    else:
+                        mod_issue_files.download()
             elif (parm[2] == 'recheck'):
                 mod_rpi.recheck()
         else:

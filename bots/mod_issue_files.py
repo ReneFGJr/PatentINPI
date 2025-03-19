@@ -17,8 +17,8 @@ def directory(directory):
     if not os.path.exists(directory):
         os.makedirs(directory)
 
-def download():
-    row = getNextFile(0)
+def download(tp = ''):
+    row = getNextFile(0,tp)
 
     ############ Diretorio
     ID = row[0]
@@ -96,9 +96,11 @@ def getNext(status):
         return row[0][0]
 
 
-def getNextFile(status):
+def getNextFile(status,type=''):
+    if type != '':
+        compl = " and rf_tipo = '"+type+"' "
     qr = "select * from rpi_issue_files where rf_status = " + str(
-        status) + " order by id_rf limit 1"
+        status) + " "+ compl +"order by id_rf limit 1"
     row = database.query(qr)
     if len(row) == 0:
         return 0
