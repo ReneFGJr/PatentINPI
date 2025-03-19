@@ -24,16 +24,28 @@ def run(parm):
     if parm[1] == 'help':
         help()
     elif parm[1] == 'issue':
-        if (len(parm) > 1):
-            print("Issue",parm[2])
-            if (parm[2] == 'files') or (parm[2] == 'download'):
-                for i in range(10):
-                    if (len(parm) > 2):
+        if len(parm) > 2:
+            print("Issue", parm[2])
+            ################################################### Limit
+            limit = 10  # Valor padrão
+            if len(parm) > 3:
+                try:
+                    limit = int(parm[4])
+                except ValueError:
+                    print(
+                        f"Erro: '{parm[4]}' não é um número válido. Usando limite padrão (10)."
+                    )
+
+            if parm[2] in ['files', 'download']:
+                for i in range(limit):
+                    if len(parm) > 3:
                         mod_issue_files.download(parm[3])
                     else:
                         mod_issue_files.download()
-            elif (parm[2] == 'recheck'):
+
+            elif parm[2] == 'recheck':
                 mod_rpi.recheck()
+
         else:
             mod_issue_files.harvesting()
     else:
