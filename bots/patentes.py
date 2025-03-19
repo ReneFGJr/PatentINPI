@@ -28,7 +28,7 @@ def run(parm):
             print("Issue", parm[2])
             ################################################### Limit
             limit = 10  # Valor padrão
-            if len(parm) > 3:
+            if len(parm) > 4:
                 try:
                     limit = int(parm[4])
                 except ValueError:
@@ -45,6 +45,8 @@ def run(parm):
 
             elif parm[2] == 'recheck':
                 mod_rpi.recheck()
+            elif parm[2] == 'unzip':
+                mod_issue_files.unzip()
 
         else:
             mod_issue_files.harvesting()
