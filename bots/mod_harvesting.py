@@ -1,6 +1,7 @@
 import os
 import requests
 from datetime import datetime, timedelta
+import zipfile
 
 
 def calcular_numero_semana(data):
@@ -29,6 +30,53 @@ def baixar_arquivo(url, destino):
         print(f'Erro ao baixar {url}: {e}')
 
 
+def mover_arquivo(origem, destino_pasta):
+    """
+    Move um arquivo para a pasta destino, evitando sobrescrever arquivos existentes.
+    Se o arquivo já existir, ele será renomeado com um sufixo numérico.
+    """
+    nome_arquivo = os.path.basename(origem)
+    destino = os.path.join(destino_pasta, nome_arquivo)
+
+    # Se já existir, renomeia adicionando um sufixo numérico
+    if not os.path.exists(destino):
+        os.rename(origem, destino)
+        print(f'Movido {nome_arquivo} para {destino}')
+
+def descompactar_arquivos():
+    """
+    Descompacta os arquivos ZIP da pasta harvesting e organiza os arquivos
+    em harvesting/txt/ ou harvesting/xml/ de acordo com o formato.
+    """
+    pasta_zip = '../harvesting'
+    pasta_tmp = os.path.join(pasta_zip, 'tmp')
+    pasta_txt = os.path.join(pasta_zip, 'txt')
+    pasta_xml = os.path.join(pasta_zip, 'xml')
+
+    # Criando pastas se não existirem
+    for pasta in [pasta_tmp, pasta_txt, pasta_xml]:
+        os.makedirs(pasta, exist_ok=True)
+
+    # Percorre os arquivos ZIP na pasta principal
+    for arquivo in os.listdir(pasta_zip):
+        if arquivo.endswith('.zip'):
+            caminho_zip = os.path.join(pasta_zip, arquivo)
+            try:
+                with zipfile.ZipFile(caminho_zip, 'r') as zip_ref:
+                    zip_ref.extractall(pasta_tmp)
+                    print(f'{arquivo} extraído para {pasta_tmp}')
+
+                # Movendo arquivos para suas respectivas pastas
+                for item in os.listdir(pasta_tmp):
+                    caminho_item = os.path.join(pasta_tmp, item)
+                    if item.endswith('.txt'):
+                        mover_arquivo(caminho_item, pasta_txt)
+                    elif item.endswith('.xml'):
+                        mover_arquivo(caminho_item, pasta_xml)
+
+            except zipfile.BadZipFile:
+                print(f'Erro: {arquivo} não é um arquivo ZIP válido.')
+
 def coletar_arquivos():
     """
     Percorre as semanas desde o ano 2000 até a semana atual,
@@ -38,7 +86,7 @@ def coletar_arquivos():
     os.makedirs(pasta_destino, exist_ok=True)
 
     data_atual = datetime.now()
-    data_inicio = datetime(2000, 1, 1)  # Início da coleta no ano 2000
+    data_inicio = datetime(2020, 1, 1)  # Início da coleta no ano 2000
 
     while data_inicio <= data_atual:
         numero_semana = calcular_numero_semana(data_inicio)
@@ -54,4 +102,5 @@ def coletar_arquivos():
 
 
 if __name__ == '__main__':
+    descompactar_arquivos()
     coletar_arquivos()
