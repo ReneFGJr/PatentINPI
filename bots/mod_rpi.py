@@ -2,6 +2,7 @@ import requests
 import database
 from bs4 import BeautifulSoup
 import re
+import mod_issue_files
 
 def register(nrRPI,status):
     qr = "select * from rpi_issue where rpi_nr = " + str(nrRPI)
@@ -33,6 +34,13 @@ def get_latest_rpi_number():
     else:
         return -1
 
+def recheck():
+    nrRPI = get_latest_rpi_number()
+    while(nrRPI > 1200):
+        mod_issue_files.register_http(nrRPI)
+        nrRPI -= 1
+
+
 def check_new_issue():
     nrRPI = get_latest_rpi_number()
     while(nrRPI > 1200):
@@ -43,6 +51,7 @@ def check_new_issue():
             url = "https://revistas.inpi.gov.br/txt/P"+str(nrRPI)+".zip"
             if check_url_exists(url):
                 register(nrRPI, 0)
+                mod_issue_files.register_http(nrRPI)
             else:
                 register(nrRPI, '404')
         nrRPI -= 1

@@ -1,5 +1,6 @@
 from colorama import Fore
 import socket, os, sys
+import mod_issue_files, mod_rpi
 
 def logo():
     versao = '0.25.03.19'
@@ -17,6 +18,23 @@ def auto():
     print("Sem parâmetros, use")
     print(Fore.YELLOW+"   python patentes.py help"+Fore.WHITE)
     print(" ")
+
+################################################################################ RUN
+def run(parm):
+    if parm[1] == 'help':
+        help()
+    elif parm[1] == 'issue':
+        if (len(parm) > 1):
+            print("Issue",parm[2])
+            if (parm[2] == 'files'):
+                for i in range(10):
+                    mod_issue_files.download()
+            elif (parm[2] == 'recheck'):
+                mod_rpi.recheck()
+        else:
+            mod_issue_files.harvesting()
+    else:
+        auto()
 
 if __name__ == '__main__':
     logo()
