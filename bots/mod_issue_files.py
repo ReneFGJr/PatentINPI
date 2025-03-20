@@ -101,13 +101,9 @@ def download(tp = ''):
         print(Fore.YELLOW+"Nenhum arquivo para processar."+Fore.WHITE)
         return -1
 
-    print("Carregando arquivo", row[1])
     ############ Diretorio
     ID = row[0]
     save_path = fileName(row)
-
-    print(save_path)
-    sys.exit()
 
     ############## URL
     file_url = row[1]
