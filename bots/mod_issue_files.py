@@ -172,6 +172,7 @@ def getNextFile(status,type=''):
         compl = " and rf_tipo = '"+type+"' "
     qr = "select * from rpi_issue_files where rf_status = " + str(
         status) + " "+ compl +"order by id_rf limit 1"
+    print(qr)
     row = database.query(qr)
     if len(row) == 0:
         return 0
