@@ -10,7 +10,8 @@ def clearNPR(nr='BR 20 2017 015440-3 Y1'):
          'E1','E2','E3','E4','E5','E6','E7','E8',
          'F1',
          'U1','U2','U3','U4','U5','U6','U7','U8',
-         'Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8'}
+         'Y1','Y2','Y3','Y4','Y5','Y6','Y7','Y8',
+         'Z1','Z2','Z3','Z4','Z5','Z6','Z7','Z8'}
 
     # Divide a string em partes e verifica se o sufixo final está na lista proibida
     partes = nr.split()
