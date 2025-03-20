@@ -9,7 +9,7 @@ def logo():
     print("██╔══██╗██╔══██╗╚══██╔══╝██╔════╝████╗  ██║╚══██╔══╝██╔════╝")
     print("██████╔╝███████║   ██║   █████╗  ██╔██╗ ██║   ██║   █████╗  ")
     print("██╔═══╝ ██╔══██║   ██║   ██╔══╝  ██║╚██╗██║   ██║   ██╔══╝  ")
-    print("██║     ██║  ██║   ██║   ███████╗██║ ╚████║   ██║   ███████╗ " + Fore.YELLOW + "Lab BR" + Fore.WHITE)
+    print("██║     ██║  ██║   ██║   ███████╗██║ ╚████║   ██║   ███████╗ " + Fore.YELLOW + "Lab BR" + Fore.YELLOW)
     print("╚═╝     ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝ " + Fore.YELLOW + "══════" + Fore.WHITE)
     print("Base de dados de patentes do INPI - BOTs - Versão",versao)
     print(" ")
@@ -57,7 +57,8 @@ def run(parm):
                             loop = mod_issue_files.download(parm[3])
                         else:
                             loop = mod_issue_files.download('')
-
+            elif parm[2] == 'process':
+                mod_issue_files.process()
             elif parm[2] == 'recheck':
                 mod_rpi.recheck()
             elif parm[2] == 'unzip':

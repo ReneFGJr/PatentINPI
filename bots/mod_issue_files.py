@@ -1,6 +1,8 @@
 import database, requests
 import sys, os
 import zipfile
+import mod_patent, mod_issue_files
+from pathlib import Path
 from colorama import Fore
 
 def checkDIR():
@@ -11,10 +13,35 @@ def checkDIR():
     else:
         print("Diretorio ", dir, "existe")
 
+def process():
+    row = getNextFile(2)
+    if row != []:
+        type = row[2]
+        ############### Tipos de Processamento
+        if (type == 'PZ'):
+            processar_PZ(row)
+
+############################################## Processar Patentes
+def processar_PZ(line):
+    IDf = line[0]
+    link = line[1]
+    type = line[2]
+    ID = line[3]
+    ISSUE = line[4]
+    print("Processar", ID, link, "TYPE:"+type, IDf, "ISSUE:", ISSUE)
+    fileName = "../_repository/_files/PZ/txt/P"+str(ISSUE)+".txt"
+    file = Path(fileName)
+    ########################################
+    if file.exists():
+        mod_patent.processar_arquivo(fileName)
+        mod_issue_files.statusUpdate(IDf, 3)
+    else:
+        print("O arquivo não existe.",fileName)
 
 def unzip(limit=100):
     for i in range(limit):
         row = getNextFile(1, 'PZ')
+
         if not row or row == 0:
             print("Nenhum arquivo para processar.")
             return
@@ -23,9 +50,14 @@ def unzip(limit=100):
         ID = row[0]
         type = row[2]
 
-        if os.path.exists(FN):  # Correção aqui
+        if os.path.isfile(FN):  # Correção aqui
+            #print("Descompactar", FN)
+            #sys.exit()
             descompactar_arquivos(FN,type)
             statusUpdate(ID,2)
+        else:
+            statusUpdate(ID, 0)
+
 
 def descompactar_arquivos(arquivo,subdir = ''):
     """
