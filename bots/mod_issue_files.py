@@ -3,6 +3,15 @@ import sys, os
 import zipfile
 from colorama import Fore
 
+def checkDIR():
+    dir = "../_repository"
+    if not os.path.exists(dir):
+        os.makedirs(dir)
+        print("Criado diretorio ", dir)
+    else:
+        print("Diretorio ", dir, "existe")
+
+
 def unzip(limit=100):
     for i in range(limit):
         row = getNextFile(1, 'PZ')
