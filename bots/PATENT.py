@@ -1,6 +1,6 @@
 from colorama import Fore
 import socket, os, sys
-import mod_issue_files, mod_rpi
+import mod_issue_files, mod_rpi, mod_sections
 
 def logo():
     versao = '0.25.03.19'
@@ -59,11 +59,14 @@ def run(parm):
                             loop = mod_issue_files.download('')
             elif parm[2] == 'process':
                 mod_issue_files.process()
+            elif parm[2] == 'metadata':
+                mod_sections.process()
             elif parm[2] == 'recheck':
                 mod_rpi.recheck()
             elif parm[2] == 'unzip':
                 mod_issue_files.unzip()
-
+            else:
+                print("Comando não encontrado.")
         else:
             mod_issue_files.harvesting()
     else:

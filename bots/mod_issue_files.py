@@ -13,13 +13,14 @@ def checkDIR():
     else:
         print("Diretorio ", dir, "existe")
 
-def process():
-    row = getNextFile(2)
-    if row != []:
-        type = row[2]
-        ############### Tipos de Processamento
-        if (type == 'PZ'):
-            processar_PZ(row)
+def process(limit = 10):
+    for i in range(limit):
+        row = getNextFile(2)
+        if row != []:
+            type = row[2]
+            ############### Tipos de Processamento
+            if (type == 'PZ'):
+                processar_PZ(row)
 
 ############################################## Processar Patentes
 def processar_PZ(line):
