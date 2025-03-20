@@ -27,6 +27,10 @@ def clearNPR(nr='BR 20 2017 015440-3 Y1'):
         print("OOPS", nr)
         sys.exit()
 
+    if len(nr) > 20:
+        print("OPPS", nr)
+        sys.exit()
+
     return nr
 
 def extrair_numeros_patentes(conteudo):
