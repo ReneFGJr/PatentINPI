@@ -101,6 +101,9 @@ def download(tp = ''):
     ID = row[0]
     save_path = fileName(row)
 
+    print(save_path)
+    sys.exit()
+
     ############## URL
     file_url = row[1]
 
