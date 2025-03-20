@@ -5,7 +5,7 @@ import zipfile
 def unzip(limit=100):
     for i in range(limit):
         row = getNextFile(1, 'PZ')
-        if not row:
+        if not row or row == 0:
             print("Nenhum arquivo para processar.")
             return
 
@@ -174,7 +174,6 @@ def getNextFile(status,type=''):
         compl = " and rf_tipo = '"+type+"' "
     qr = "select * from rpi_issue_files where rf_status = " + str(
         status) + " "+ compl +"order by id_rf limit 1"
-    print("SQL",qr)
     row = database.query(qr)
     if len(row) == 0:
         return 0
