@@ -4,7 +4,10 @@ import re
 
 
 def clearNPR(nr='BR 20 2017 015440-3 Y1'):
-    t = {'A1','A8','B1', 'B8', 'C8', 'F1', 'Y1', 'Y8'}
+    t = {'A1','A2','A3','A4','A5','A6','A7','A8',
+         'B1', 'B2','B8',
+         'C1','C8',
+         'F1', 'Y1', 'Y8'}
 
     # Divide a string em partes e verifica se o sufixo final está na lista proibida
     partes = nr.split()
