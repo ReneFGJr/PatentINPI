@@ -23,6 +23,8 @@ def auto():
 def run(parm):
     if parm[1] == 'help':
         help()
+    elif parm[1] == 'resume':
+        mod_issue_files.resume()
     elif parm[1] == 'issue':
         if len(parm) > 2:
             print("Issue", parm[2])

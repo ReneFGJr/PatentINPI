@@ -159,6 +159,12 @@ def getNext(status):
     else:
         return row[0][0]
 
+def resume():
+    qr = "select count(*) from rpi_issue_files where rf_status = 0"
+    row = database.query(qr)
+    print(row)
+    return row[0][0]
+
 
 def getNextFile(status,type=''):
     compl = ''
