@@ -3,8 +3,8 @@ Description=FastAPI Service
 After=network.target
 
 [Service]
-User=root  # Mude para o usuário que executará o serviço
-WorkingDirectory=/data/PatentINPI/api  # Caminho para sua API
+#User=brapci
+WorkingDirectory=/data/PatentINPI/api
 ExecStart=/usr/bin/env uvicorn app:app --host 0.0.0.0 --port 3000 --workers 4
 Restart=always
 
