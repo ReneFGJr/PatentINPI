@@ -34,7 +34,6 @@ def descompactar_arquivos(arquivo,subdir = ''):
     try:
         with zipfile.ZipFile(arquivo, 'r') as zip_ref:
             zip_ref.extractall(pasta_tmp)
-            print(f'{arquivo} extraído para {pasta_tmp}')
 
         # Movendo arquivos para suas respectivas pastas
         for item in os.listdir(pasta_tmp):
