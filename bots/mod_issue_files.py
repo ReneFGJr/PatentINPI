@@ -100,6 +100,8 @@ def download(tp = ''):
     if not row or row == 0:
         print(Fore.YELLOW+"Nenhum arquivo para processar."+Fore.WHITE)
         return -1
+
+    print("Carregando arquivo", row[1])
     ############ Diretorio
     ID = row[0]
     save_path = fileName(row)
