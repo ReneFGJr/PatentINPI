@@ -92,6 +92,8 @@ def statusUpdate(ID,status):
     database.update(qu)
 
 def download(tp = ''):
+    os.makedirs("../_repository", exist_ok=True)
+
     row = getNextFile(0,tp)
 
     if not row or row == 0:
