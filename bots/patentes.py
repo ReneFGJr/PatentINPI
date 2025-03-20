@@ -9,8 +9,8 @@ def logo():
     print("██╔══██╗██╔══██╗╚══██╔══╝██╔════╝████╗  ██║╚══██╔══╝██╔════╝")
     print("██████╔╝███████║   ██║   █████╗  ██╔██╗ ██║   ██║   █████╗  ")
     print("██╔═══╝ ██╔══██║   ██║   ██╔══╝  ██║╚██╗██║   ██║   ██╔══╝  ")
-    print("██║     ██║  ██║   ██║   ███████╗██║ ╚████║   ██║   ███████╗ "+Fore.BLUE+"Lab BR"+Fore.WHITE)
-    print("╚═╝     ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝"+Fore.WHITE)
+    print("██║     ██║  ██║   ██║   ███████╗██║ ╚████║   ██║   ███████╗ " + Fore.YELLOW + "Lab BR" + Fore.WHITE)
+    print("╚═╝     ╚═╝  ╚═╝   ╚═╝   ╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝ " + Fore.YELLOW + "══════" + Fore.WHITE)
     print("Base de dados de patentes do INPI - BOTs - Versão",versao)
     print(" ")
 
