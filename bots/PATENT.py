@@ -18,6 +18,15 @@ def auto():
     print("Sem parâmetros, use")
     print(Fore.YELLOW+"   python patentes.py help"+Fore.WHITE)
     print(" ")
+    fcn = [{'cmd':'checkSystem','desc':'Verificar diretórios'},
+           {'cmd':'resume','desc':'Retomar download'},
+           {'cmd':'issue','desc':'Processar arquivos'},
+           {'cmd':'issue files','desc':'Baixar arquivos'},
+           {'cmd':'issue download','desc':'Baixar arquivos'},
+           {'cmd':'issue recheck','desc':'Revisar arquivos'},
+           {'cmd':'issue unzip','desc':'Descompactar arquivos'}]
+    for i in fcn:
+        print(i['cmd'] + " - " + i['desc'])
 
 ################################################################################ RUN
 def run(parm):
