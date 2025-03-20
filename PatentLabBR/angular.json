@@ -23,6 +23,8 @@
             "polyfills": [
               "zone.js"
             ],
+            "baseHref": "/patent/",
+            "deployUrl": "/patent/",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
