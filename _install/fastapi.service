@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=ubuntu  # Mude para o usuário que executará o serviço
 WorkingDirectory=/data/PatentINPI/api  # Caminho para sua API
-ExecStart=/usr/bin/env uvicorn app:app --host 0.0.0.0 --port 8000 --workers 4
+ExecStart=/usr/bin/env uvicorn app:app --host 0.0.0.0 --port 3000 --workers 4
 Restart=always
 
 [Install]
