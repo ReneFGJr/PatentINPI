@@ -75,7 +75,7 @@ if __name__ == '__main__':
     if (hostname == 'DESKTOP-M0Q0TD7'):
         diretorio = os.getcwd()
     else:
-        diretorio = '/data/Brapci3.1/bots/ROBOTi'
+        diretorio = '/data/PatentINPI/bots/'
 
     print("Diretório", diretorio)
     os.chdir(diretorio)
