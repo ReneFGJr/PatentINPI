@@ -30,7 +30,8 @@ def extrair_numeros_patentes(conteudo):
     Extrai todos os números de patentes do conteúdo do arquivo,
     considerando apenas quando (11) está no início da linha.
     """
-    return re.findall(r'^\((11|21)\)\s+([\w\s-]+)', conteudo, re.MULTILINE)
+    rst = re.findall(r'^\((11|21)\)\s+([\w\s-]+)', conteudo, re.MULTILINE)
+    return rst
 
 
 def verificar_e_inserir_patente(numero_patente):
@@ -55,8 +56,13 @@ def processar_arquivo(file):
 
         numeros_patentes = extrair_numeros_patentes(conteudo)
         for numero in numeros_patentes:
-            numero = clearNPR(numero)
-            verificar_e_inserir_patente(numero)
+            numero = clearNPR(numero[1])
+            if (len(numero) < 6):
+                print("Número de patente inválido:", numero)
+                sys.exit()
+            else:
+                verificar_e_inserir_patente(numero)
+                verificar_e_inserir_patente(numero[1])
 
     print("Processamento concluído.")
 
