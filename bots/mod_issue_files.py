@@ -161,6 +161,7 @@ def getNext(status):
 
 
 def getNextFile(status,type=''):
+    compl = ''
     if type != '':
         compl = " and rf_tipo = '"+type+"' "
     qr = "select * from rpi_issue_files where rf_status = " + str(
