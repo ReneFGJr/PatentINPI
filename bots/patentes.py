@@ -39,11 +39,13 @@ def run(parm):
                     )
 
             if parm[2] in ['files', 'download']:
+                loop = 1
                 for i in range(limit):
-                    if len(parm) > 3:
-                        mod_issue_files.download(parm[3])
-                    else:
-                        mod_issue_files.download('')
+                    if loop == 1:
+                        if len(parm) > 3:
+                            loop = mod_issue_files.download(parm[3])
+                        else:
+                            loop = mod_issue_files.download('')
 
             elif parm[2] == 'recheck':
                 mod_rpi.recheck()

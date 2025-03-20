@@ -95,7 +95,7 @@ def download(tp = ''):
 
     if not row or row == 0:
         print("Nenhum arquivo para processar.")
-        return
+        return -1
     ############ Diretorio
     ID = row[0]
     save_path = fileName(row)
@@ -113,9 +113,7 @@ def download(tp = ''):
     else:
         statusUpdate(ID, 500)
     print("   download", save_path)
-
-
-
+    return 1
 
 def register(nrRPI, status, type, file):
     qr = "select * from rpi_issue_files where rf_url = '" + file + "'"
