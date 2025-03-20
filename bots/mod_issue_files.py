@@ -175,10 +175,18 @@ def getNext(status):
         return row[0][0]
 
 def resume():
-    qr = "select count(*) from rpi_issue_files where rf_status = 0"
+    qr = "select count(*), rf_status, rf_tipo from rpi_issue_files group by rf_tipo, rf_status order by rf_tipo, rf_status"
     row = database.query(qr)
-    print(row)
-    return row[0][0]
+    status = {0: 'Pendente', 1: 'Baixado', 2: 'Descompactado'}
+    type = {'PZ': 'Patente ZIP', 'CZ': 'Certificado ZIP', 'PC': 'Patente Completa', 'PDC': 'Comunicado',
+            'PDD': 'Desenho', 'PDM': 'Marca', 'PPC': 'Programa de Computador', 'PTP': 'Topografia de Circuito Integrado'}
+    tp = ''
+    for i in row:
+        if tp != i[2]:
+            tp = i[2]
+            print("=============== Tipo", type[tp],tp)
+        print(status[i[1]], i[0])
+
 
 
 def getNextFile(status,type=''):
