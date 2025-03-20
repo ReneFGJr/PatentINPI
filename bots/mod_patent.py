@@ -30,7 +30,7 @@ def extrair_numeros_patentes(conteudo):
     Extrai todos os números de patentes do conteúdo do arquivo,
     considerando apenas quando (11) está no início da linha.
     """
-    return re.findall(r'^\(11\)\s+([\w\s-]+)', conteudo, re.MULTILINE)
+    return re.findall(r'^\((11|21)\)\s+([\w\s-]+)', conteudo, re.MULTILINE)
 
 
 def verificar_e_inserir_patente(numero_patente):

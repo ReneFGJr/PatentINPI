@@ -209,7 +209,7 @@ def getNext(status):
 def resume():
     qr = "select count(*), rf_status, rf_tipo from rpi_issue_files group by rf_tipo, rf_status order by rf_tipo, rf_status"
     row = database.query(qr)
-    status = {0: 'Pendente', 1: 'Baixado', 2: 'Descompactado',3:'Processado'}
+    status = {0: 'Pendente', 1: 'Baixado', 2: 'Descompactado',3:'Pre-Processado',4:'Processado Metadados I', 5:'Processado Metadados II'}
     type = {'PZ': 'Patente ZIP', 'CZ': 'Certificado ZIP', 'PC': 'Patente Completa', 'PDC': 'Comunicado',
             'PDD': 'Desenho', 'PDM': 'Marca', 'PPC': 'Programa de Computador', 'PTP': 'Topografia de Circuito Integrado'}
     tp = ''
