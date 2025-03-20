@@ -59,7 +59,7 @@ def mover_arquivo(origem, destino_pasta):
     # Se já existir, renomeia adicionando um sufixo numérico
     if not os.path.exists(destino):
         os.rename(origem, destino)
-        print(f'Movido {nome_arquivo} para {destino}')
+        print(f'Movido para {destino}')
 
 def harvesting(limit=10):
     for i in range(limit):
