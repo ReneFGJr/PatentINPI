@@ -93,8 +93,9 @@ def statusUpdate(ID,status):
 def download(tp = ''):
     row = getNextFile(0,tp)
 
-    print(row)
-
+    if not row or row == 0:
+        print("Nenhum arquivo para processar.")
+        return
     ############ Diretorio
     ID = row[0]
     save_path = fileName(row)
