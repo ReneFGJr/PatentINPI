@@ -1,6 +1,7 @@
 import database, requests
 import sys, os
 import zipfile
+from colorama import Fore
 
 def unzip(limit=100):
     for i in range(limit):
@@ -58,7 +59,7 @@ def mover_arquivo(origem, destino_pasta):
     # Se já existir, renomeia adicionando um sufixo numérico
     if not os.path.exists(destino):
         os.rename(origem, destino)
-        print(f'   Movendodo para {destino}')
+        print(f'   Movendo para {destino}')
 
 def harvesting(limit=10):
     for i in range(limit):
@@ -94,7 +95,7 @@ def download(tp = ''):
     row = getNextFile(0,tp)
 
     if not row or row == 0:
-        print("Nenhum arquivo para processar.")
+        print(Fore.YELLOW+"Nenhum arquivo para processar."+Fore.WHITE)
         return -1
     ############ Diretorio
     ID = row[0]
