@@ -41,7 +41,7 @@ def run(parm):
                     if len(parm) > 3:
                         mod_issue_files.download(parm[3])
                     else:
-                        mod_issue_files.download()
+                        mod_issue_files.download('')
 
             elif parm[2] == 'recheck':
                 mod_rpi.recheck()
