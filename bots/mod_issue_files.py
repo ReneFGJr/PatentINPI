@@ -71,7 +71,7 @@ def harvesting(limit=10):
         return id
 
 
-def directory(directory):
+def directoryCheck(directory):
     # Verifica se o diretório existe, se não, cria
     if not os.path.exists(directory):
         os.makedirs(directory)
@@ -79,7 +79,7 @@ def directory(directory):
 def fileName(row):
     dir = "../_repository/"
     pasta_tmp = os.path.join(dir, row[2])
-    directory(pasta_tmp)
+    directoryCheck(pasta_tmp)
 
     ############## Arquivo
     save_path = dir + row[2] + "/" + row[1].split("/")[-1]
@@ -93,7 +93,7 @@ def statusUpdate(ID,status):
 
 def download(tp = ''):
     dir = "../_repository"
-    directory(dir)
+    directoryCheck(dir)
 
     row = getNextFile(0,tp)
 
