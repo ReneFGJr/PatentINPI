@@ -2,7 +2,7 @@ import database, requests
 import sys, os
 import zipfile
 
-def unzip(limit=10):
+def unzip(limit=100):
     for i in range(limit):
         row = getNextFile(1, 'PZ')
         if not row:
@@ -59,7 +59,7 @@ def mover_arquivo(origem, destino_pasta):
     # Se já existir, renomeia adicionando um sufixo numérico
     if not os.path.exists(destino):
         os.rename(origem, destino)
-        print(f'Movido para {destino}')
+        print(f'   Movendodo para {destino}')
 
 def harvesting(limit=10):
     for i in range(limit):
