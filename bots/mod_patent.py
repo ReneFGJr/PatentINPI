@@ -2,12 +2,25 @@ import database
 import os, sys
 import re
 
-def clearNPR(nr):
-    t = {'B1','B8','C8','F1','Y1','Y8'}
-    nr = nr.replace(' B1','')
-    nr = nr.replace(' B1', '')
-    nr = nr.replace(' B1', '')
-    return re.sub(r'\D', '', nr)
+
+def clearNPR(nr='BR 20 2017 015440-3 Y1'):
+    t = {'A1','A8','B1', 'B8', 'C8', 'F1', 'Y1', 'Y8'}
+
+    # Divide a string em partes e verifica se o sufixo final está na lista proibida
+    partes = nr.split()
+    if partes[-1] in t:
+        nr = nr.replace(partes[-1], '')
+
+
+    # Remove todos os caracteres não numéricos
+    nr = nr.replace('\n', '')
+    nr = nr.strip()
+
+    if '\n' in nr or '\r' in nr:
+        print("OOPS", nr)
+        sys.exit()
+
+    return nr
 
 def extrair_numeros_patentes(conteudo):
     """
@@ -23,7 +36,6 @@ def verificar_e_inserir_patente(numero_patente):
     """
     numero_patente = numero_patente.strip()
     qr = "SELECT COUNT(*) FROM rpi_patent_nr WHERE p_nr = '"+numero_patente+"'"
-    print(qr)
     rows = database.query(qr)
     row = rows[0]
     if row[0] == 0:
@@ -40,7 +52,7 @@ def processar_arquivo(file):
 
         numeros_patentes = extrair_numeros_patentes(conteudo)
         for numero in numeros_patentes:
-            numero = numero.replace('\n','').strip()
+            numero = clearNPR(numero)
             verificar_e_inserir_patente(numero)
 
     print("Processamento concluído.")
