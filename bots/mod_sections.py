@@ -1,5 +1,5 @@
 import re, sys
-import mod_issue_files
+import mod_issue_files, mod_patent
 from pathlib import Path
 from colorama import Fore
 
@@ -27,7 +27,7 @@ def processar_PZ(line):
     if file.exists():
         with open(fileName, 'r', encoding='latin-1') as f:
             conteudo = f.read()
-            metadados(conteudo)
+            metadados(conteudo, ISSUE)
         #mod_issue_files.statusUpdate(IDf, 4)
     else:
         print("O arquivo não existe.", fileName)
@@ -41,11 +41,34 @@ def separar_sessoes(texto):
 
     return sessoes
 
-def metadados(texto):
+
+def metadados(texto, ISSUE):
     sessoes = separar_sessoes(texto)
+
     for i, sessao in enumerate(sessoes, 1):
-        print(f"Sessão {i}:")
-        print(sessao)
-        print("-" * 50)
+        sessao = sessao.strip()
         if (sessao[0] == '('):
+            nrPAT = mod_patent.extrair_numeros_patentes(sessao)
+            nrPAT = mod_patent.clearNPR(nrPAT[0][1])
+            IDp = mod_patent.get_id(nrPAT)
+            print(f"Sessão {i}: {nrPAT} => {IDp}")
+            meta = extrair_metadados(sessao)
+            for m in meta:
+                print(f"{m['codigo']} [{ISSUE}] == {m['valor']}")
+                if (m['codigo'] == '73'):
+                    mod_patent.update54(IDp, m['valor'])
+            print("=" * 50)
             sys.exit()
+
+
+def extrair_metadados(texto):
+    # Expressão regular para capturar campos e seus valores
+    padrao = re.compile(r"\((\w{2})\)\s+(.*?)(?=\n\(\w{2}\)|\Z)", re.DOTALL)
+    metadados = []
+
+    for match in padrao.finditer(texto):
+        codigo = match.group(1)
+        valor = match.group(2).strip()
+        metadados.append({'codigo': codigo, 'valor': valor})
+
+    return metadados

@@ -2,6 +2,13 @@ import database
 import os, sys
 import re
 
+def get_id(PAT):
+    qr = "SELECT id_p FROM rpi_patent_nr WHERE p_nr = '" + PAT + "'"
+    rows = database.query(qr)
+    if len(rows) == 0:
+        print(f"Patente {PAT} não encontrada.")
+        sys.exit()
+    return rows[0][0]
 
 def clearNPR(nr='BR 20 2017 015440-3 Y1'):
     t = {
